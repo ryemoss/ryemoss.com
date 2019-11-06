@@ -12,14 +12,6 @@ export default {
     closeModal() {
 			this.$emit('closeModal');
 		},
-		getKeyDown(e) {
-			if (e.keyCode == 27) {
-				this.closeModal();
-			}
-		}
-  },
-  mounted() {
-    window.addEventListener('keydown', this.getKeyDown)
   }
 }
 </script>

@@ -60,6 +60,7 @@ export default {
   },
   async mounted() {
     await this.getFirebaseImages();
+    window.addEventListener('keydown', this.keyListener);
   },
   methods: {
     scrolling(e) {
@@ -91,6 +92,25 @@ export default {
     closeModal() {
       if (this.showModal)
         this.showModal = false;
+    },
+    keyListener(e) {
+      if (e.keyCode == 13) // enter
+        this.toggleModal();
+      else if (e.keyCode == 39) { // right
+        var idx = this.images.indexOf(this.selectedImage);
+        if (idx + 1 < this.images.length)
+          this.selectedImage = this.images[idx+1];
+      }
+      else if (e.keyCode == 37) { // left
+        var idx = this.images.indexOf(this.selectedImage);
+        if (idx - 1 >= 0)
+          this.selectedImage = this.images[idx-1];
+      }
+      else if (e.keyCode == 27) { // esc
+        if (this.showModal)
+          this.closeModal();
+      }
+      
     }
   },
 }
