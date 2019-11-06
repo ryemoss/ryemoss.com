@@ -4,7 +4,7 @@
     <img src="@/assets/icon.gif" class="titleicon" />
 
     <div class="indextitle">
-      <router-link to="/photos">RYEMOSS</router-link>
+      <router-link to="/">RYEMOSS</router-link>
     </div>
 
     <div class="nav-buttons">
