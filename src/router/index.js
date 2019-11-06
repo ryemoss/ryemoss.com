@@ -4,7 +4,6 @@ import Home from '../views/Home.vue'
 import Photos from '../views/Photos.vue'
 import Artwork from '../views/Artwork.vue'
 import About from '../views/About.vue'
-import Experience from '../views/Experience.vue'
 
 Vue.use(VueRouter)
 
@@ -28,12 +27,7 @@ const routes = [
     path: '/about',
     name: 'about',
     component: About
-  },
-  {
-    path: '/experience',
-    name: 'experience',
-    component: Experience
-  },
+  }
 ]
 
 const router = new VueRouter({

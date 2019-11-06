@@ -11,7 +11,6 @@
 			<router-link class="nav-button" to="/photos">Photos</router-link>
 			<router-link class="nav-button" to="/artwork">Artwork</router-link>
 			<router-link class="nav-button" to="/about">About</router-link>
-			<router-link class="nav-button" to="/experience">Experience</router-link>
     </div>
 
     <div class="socials">
