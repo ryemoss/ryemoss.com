@@ -16,9 +16,10 @@
           <i class="fa fa-circle single"></i>
         </span>
         <div class="other-images" @scroll='scrolling'>
-          <img v-for="image in images" :key="image+Math.random()" 
-            @click="selectedImage=image"
+          <img v-for="(image,idx) in images" :key="image+Math.random()" 
+            @click="selectImage(image, idx)"
             class="gallery-image"
+            :class="{'active-gallery-img': selectedIdx == idx}"
             width='60px'
             height='60px'
             :src='image'
@@ -51,6 +52,7 @@ export default {
   data() {
     return {
       selectedImage: '',
+      selectedIdx: 0,
       galleryEnd: false,
       galleryBeginning: true,
       firebasePic: '',
@@ -64,6 +66,7 @@ export default {
   },
   methods: {
     scrolling(e) {
+      console.log(e);  
       if (e.target.offsetWidth >= e.target.scrollWidth-e.target.scrollLeft-30)
         this.galleryEnd = true;
       else
@@ -86,6 +89,10 @@ export default {
         })
       })
     },
+    selectImage(image,idx) {
+      this.selectedImage = image;
+      this.selectedIdx = idx;
+    },
     toggleModal() {
       this.showModal = !this.showModal;
     },
@@ -99,12 +106,12 @@ export default {
       else if (e.keyCode == 39) { // right
         var idx = this.images.indexOf(this.selectedImage);
         if (idx + 1 < this.images.length)
-          this.selectedImage = this.images[idx+1];
+          this.selectImage(this.images[idx+1], idx+1);
       }
       else if (e.keyCode == 37) { // left
         var idx = this.images.indexOf(this.selectedImage);
         if (idx - 1 >= 0)
-          this.selectedImage = this.images[idx-1];
+          this.selectImage(this.images[idx-1], idx-1);
       }
       else if (e.keyCode == 27) { // esc
         if (this.showModal)
@@ -164,6 +171,9 @@ export default {
   opacity: .9;
   cursor: pointer;
 }
+.active-gallery-img {
+  box-shadow: 0 0 4px 1px white;
+}
 .gallery-more-right-arrow {
   color: #435a48b0;
   font-size: 4px;
@@ -180,5 +190,21 @@ export default {
 }
 .fade-out {
   opacity: 0;
+}
+
+@media (max-width: 720px) {
+  .gallery {
+    max-width: 100%;
+    padding: 10px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    max-height: calc(100vh - 114px);
+  }
+  .carousel-container {
+    max-width: 100%;
+    margin: 0;
+    left: 0;
+  }
 }
 </style>

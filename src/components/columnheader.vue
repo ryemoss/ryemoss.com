@@ -1,5 +1,5 @@
 <template>
-  <div class="column-header">
+  <div class="column-header" :class="{'toggled': toggled}">
 
     <img src="@/assets/icon.gif" class="titleicon" />
 
@@ -19,6 +19,8 @@
       <a class="socialicon" href="https://theeldergoose.deviantart.com/gallery/" target="_blank"><i class="la la-deviantart"></i></a>
       <a class="socialicon" href="mailto:images@ryemoss.com" target="_blank"><i class="la la-envelope"></i></a>
     </div>
+
+    <div class="expand" @click="toggleDrawer">>>></div>
     
   </div>
 </template>
@@ -27,7 +29,13 @@
 export default {
   data() {
     return {
-      active: 'photos'
+      active: 'photos',
+      toggled: false
+    }
+  },
+  methods: {
+    toggleDrawer() {
+      this.toggled = !this.toggled;
     }
   }
 }
@@ -45,6 +53,10 @@ export default {
   flex-direction: column;
   padding: 0 30px;
   color: #888;
+  transition: transform .3s ease-out;
+}
+.toggled {
+  transform: translateX(-100%);
 }
 .titleicon {
   margin-top: 60px;
@@ -76,5 +88,24 @@ export default {
   width: @columnheaderWidth;
   justify-content: space-between;
   padding: 20px;
+}
+.expand {
+  display: none;
+  position:absolute;
+  top: 0;
+  right: 0;
+  padding: 15px;
+  transform: translateX(100%);
+  background-color: #222;
+}
+
+@media (max-width: 720px) {
+  .column-header {
+    position: absolute;
+    z-index:100;
+  }
+  .expand {
+    display: block;
+  }
 }
 </style>
